@@ -1,7 +1,7 @@
 package day01;
 
 public class Input {
-    public static final String INPUT = """
+    public static final String[] INPUT = """
             14gxqgqsqqbxfpxnbccjc33eight
             eight2sevenkl
             mrjstg5onetwoeightgcczx8vgrgl
@@ -1002,5 +1002,5 @@ public class Input {
             nftdkmtmcz4
             nlnineeightmndkqz8nineonenrqm
             nrhdxfsqvxcbcghf35eightthreeseven5
-            """;
+            """.split("\n");
 }

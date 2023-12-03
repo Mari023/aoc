@@ -2,15 +2,14 @@ package day03;
 
 public class Day03 {
     public static void main(String[] args) {
-        String[] inputs = Input.INPUT.split("\n");
         long solution = 0;
-        for (int i = 0; i < inputs.length; i++) {
-            String input = inputs[i];
+        for (int i = 0; i < Input.INPUT.length; i++) {
+            String input = Input.INPUT[i];
             for (int j = 0; j < input.length(); j++) {
                 if (isPart(input.charAt(j))) {
-                    int a = getNumber(inputs, i - 1, j - 1);
-                    int b = getNumber(inputs, i - 1, j);
-                    int c = getNumber(inputs, i - 1, j + 1);
+                    int a = getNumber(Input.INPUT, i - 1, j - 1);
+                    int b = getNumber(Input.INPUT, i - 1, j);
+                    int c = getNumber(Input.INPUT, i - 1, j + 1);
 
                     if (b != 0) {
                         solution += b;
@@ -18,12 +17,12 @@ public class Day03 {
                         solution += a + c;
                     }
 
-                    solution += getNumber(inputs, i, j - 1);
-                    solution += getNumber(inputs, i, j + 1);
+                    solution += getNumber(Input.INPUT, i, j - 1);
+                    solution += getNumber(Input.INPUT, i, j + 1);
 
-                    a = getNumber(inputs, i + 1, j - 1);
-                    b = getNumber(inputs, i + 1, j);
-                    c = getNumber(inputs, i + 1, j + 1);
+                    a = getNumber(Input.INPUT, i + 1, j - 1);
+                    b = getNumber(Input.INPUT, i + 1, j);
+                    c = getNumber(Input.INPUT, i + 1, j + 1);
 
                     if (b != 0) {
                         solution += b;
@@ -37,15 +36,15 @@ public class Day03 {
         System.out.println(solution);
 
         solution = 0;
-        for (int i = 0; i < inputs.length; i++) {
-            String input = inputs[i];
+        for (int i = 0; i < Input.INPUT.length; i++) {
+            String input = Input.INPUT[i];
             for (int j = 0; j < input.length(); j++) {
                 if (input.charAt(j) == '*') {
                     int gearRatio = 1;
                     int numberCount = 0;
-                    int a = getNumber(inputs, i - 1, j - 1);
-                    int b = getNumber(inputs, i - 1, j);
-                    int c = getNumber(inputs, i - 1, j + 1);
+                    int a = getNumber(Input.INPUT, i - 1, j - 1);
+                    int b = getNumber(Input.INPUT, i - 1, j);
+                    int c = getNumber(Input.INPUT, i - 1, j + 1);
 
                     if (b != 0) {
                         gearRatio *= b;
@@ -61,20 +60,20 @@ public class Day03 {
                         }
                     }
 
-                    int d = getNumber(inputs, i, j - 1);
+                    int d = getNumber(Input.INPUT, i, j - 1);
                     if(d != 0) {
                         gearRatio *= d;
                         numberCount++;
                     }
-                    d = getNumber(inputs, i, j + 1);
+                    d = getNumber(Input.INPUT, i, j + 1);
                     if(d != 0) {
                         gearRatio *= d;
                         numberCount++;
                     }
 
-                    a = getNumber(inputs, i + 1, j - 1);
-                    b = getNumber(inputs, i + 1, j);
-                    c = getNumber(inputs, i + 1, j + 1);
+                    a = getNumber(Input.INPUT, i + 1, j - 1);
+                    b = getNumber(Input.INPUT, i + 1, j);
+                    c = getNumber(Input.INPUT, i + 1, j + 1);
 
 
                     if (b != 0) {

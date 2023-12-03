@@ -2,10 +2,9 @@ package day02;
 
 public class Day02 {
     public static void main(String[] args) {
-        String[] inputs = Input.INPUT.split("\n");
-        Game[] games = new Game[inputs.length];
-        for (int i = 0; i < inputs.length; i++) {
-            String[] s = inputs[i].split(":");
+        Game[] games = new Game[Input.INPUT.length];
+        for (int i = 0; i < Input.INPUT.length; i++) {
+            String[] s = Input.INPUT[i].split(":");
             int ID = Integer.parseInt(s[0].split(" ")[1]);
             String[] roundStrings = s[1].split(";");
             Round[] rounds = new Round[roundStrings.length];

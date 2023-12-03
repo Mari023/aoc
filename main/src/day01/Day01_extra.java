@@ -2,9 +2,8 @@ package day01;
 
 public class Day01_extra {
     public static void main(String[] args) {
-        String[] inputs = Input.INPUT.split("\n");
         long result = 0;
-        for (String input : inputs) {
+        for (String input : Input.INPUT) {
             input = input.replaceAll("one", "one1one");
             input = input.replaceAll("two", "two2two");
             input = input.replaceAll("three", "three3three");
