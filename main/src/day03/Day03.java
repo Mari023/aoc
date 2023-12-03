@@ -1,100 +1,96 @@
 package day03;
 
+import util.MutableLong;
+import util.Util;
+
 public class Day03 {
     public static void main(String[] args) {
-        long solution = 0;
-        for (int i = 0; i < Input.INPUT.length; i++) {
-            String input = Input.INPUT[i];
-            for (int j = 0; j < input.length(); j++) {
-                if (isPart(input.charAt(j))) {
-                    int a = getNumber(Input.INPUT, i - 1, j - 1);
-                    int b = getNumber(Input.INPUT, i - 1, j);
-                    int c = getNumber(Input.INPUT, i - 1, j + 1);
+        final MutableLong solution = new MutableLong();
+        Util.loopSC(Input.INPUT, (String input, char ch, int i, int j) -> {
+            if (isPart(ch)) {
+                int a = getNumber(Input.INPUT, i - 1, j - 1);
+                int b = getNumber(Input.INPUT, i - 1, j);
+                int c = getNumber(Input.INPUT, i - 1, j + 1);
 
-                    if (b != 0) {
-                        solution += b;
-                    } else {
-                        solution += a + c;
-                    }
+                if (b != 0) {
+                    solution.add(b);
+                } else {
+                    solution.add(a + c);
+                }
 
-                    solution += getNumber(Input.INPUT, i, j - 1);
-                    solution += getNumber(Input.INPUT, i, j + 1);
+                solution.add(getNumber(Input.INPUT, i, j - 1));
+                solution.add(getNumber(Input.INPUT, i, j + 1));
 
-                    a = getNumber(Input.INPUT, i + 1, j - 1);
-                    b = getNumber(Input.INPUT, i + 1, j);
-                    c = getNumber(Input.INPUT, i + 1, j + 1);
+                a = getNumber(Input.INPUT, i + 1, j - 1);
+                b = getNumber(Input.INPUT, i + 1, j);
+                c = getNumber(Input.INPUT, i + 1, j + 1);
 
-                    if (b != 0) {
-                        solution += b;
-                    } else {
-                        solution += a + c;
-                    }
+                if (b != 0) {
+                    solution.add(b);
+                } else {
+                    solution.add(a + c);
                 }
             }
-        }
+        });
 
         System.out.println(solution);
 
-        solution = 0;
-        for (int i = 0; i < Input.INPUT.length; i++) {
-            String input = Input.INPUT[i];
-            for (int j = 0; j < input.length(); j++) {
-                if (input.charAt(j) == '*') {
-                    int gearRatio = 1;
-                    int numberCount = 0;
-                    int a = getNumber(Input.INPUT, i - 1, j - 1);
-                    int b = getNumber(Input.INPUT, i - 1, j);
-                    int c = getNumber(Input.INPUT, i - 1, j + 1);
+        solution.set(0);
+        Util.loopSC(Input.INPUT, (String input, char ch, int i, int j) -> {
+            if (ch == '*') {
+                int gearRatio = 1;
+                int numberCount = 0;
+                int a = getNumber(Input.INPUT, i - 1, j - 1);
+                int b = getNumber(Input.INPUT, i - 1, j);
+                int c = getNumber(Input.INPUT, i - 1, j + 1);
 
-                    if (b != 0) {
-                        gearRatio *= b;
-                        numberCount++;
-                    } else {
-                        if(a != 0) {
-                            gearRatio *= a;
-                            numberCount++;
-                        }
-                        if(c != 0) {
-                            gearRatio *= c;
-                            numberCount++;
-                        }
-                    }
-
-                    int d = getNumber(Input.INPUT, i, j - 1);
-                    if(d != 0) {
-                        gearRatio *= d;
+                if (b != 0) {
+                    gearRatio *= b;
+                    numberCount++;
+                } else {
+                    if (a != 0) {
+                        gearRatio *= a;
                         numberCount++;
                     }
-                    d = getNumber(Input.INPUT, i, j + 1);
-                    if(d != 0) {
-                        gearRatio *= d;
+                    if (c != 0) {
+                        gearRatio *= c;
                         numberCount++;
                     }
-
-                    a = getNumber(Input.INPUT, i + 1, j - 1);
-                    b = getNumber(Input.INPUT, i + 1, j);
-                    c = getNumber(Input.INPUT, i + 1, j + 1);
-
-
-                    if (b != 0) {
-                        gearRatio *= b;
-                        numberCount++;
-                    } else {
-                        if(a != 0) {
-                            gearRatio *= a;
-                            numberCount++;
-                        }
-                        if(c != 0) {
-                            gearRatio *= c;
-                            numberCount++;
-                        }
-                    }
-
-                    if(numberCount >= 2)
-                        solution += gearRatio;
                 }
+
+                int d = getNumber(Input.INPUT, i, j - 1);
+                if (d != 0) {
+                    gearRatio *= d;
+                    numberCount++;
+                }
+                d = getNumber(Input.INPUT, i, j + 1);
+                if (d != 0) {
+                    gearRatio *= d;
+                    numberCount++;
+                }
+
+                a = getNumber(Input.INPUT, i + 1, j - 1);
+                b = getNumber(Input.INPUT, i + 1, j);
+                c = getNumber(Input.INPUT, i + 1, j + 1);
+
+
+                if (b != 0) {
+                    gearRatio *= b;
+                    numberCount++;
+                } else {
+                    if (a != 0) {
+                        gearRatio *= a;
+                        numberCount++;
+                    }
+                    if (c != 0) {
+                        gearRatio *= c;
+                        numberCount++;
+                    }
+                }
+
+                if (numberCount >= 2) solution.add(gearRatio);
             }
-        }
+        });
 
         System.out.println(solution);
     }
@@ -131,8 +127,7 @@ public class Day03 {
     }
 
     public static boolean isDigit(String s, int i) {
-        if (i < 0 || i >= s.length())
-            return false;
+        if (i < 0 || i >= s.length()) return false;
         return Character.isDigit(s.charAt(i));
     }
 }
