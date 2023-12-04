@@ -10,12 +10,19 @@ public class Day04 {
         List<ScratchCard> scratchCards = new ArrayList<>();
         Util.loopS(Input.INPUT, (s, i) -> scratchCards.add(ScratchCard.create(s)));
 
+        System.out.println(part1(scratchCards));
+        System.out.println(part2(scratchCards));
+    }
+
+    private static long part1(List<ScratchCard> scratchCards) {
         long result = 0;
         for (ScratchCard scratchCard : scratchCards) {
             result += scratchCard.getPoints();
         }
-        System.out.println(result);
+        return result;
+    }
 
+    private static long part2(List<ScratchCard> scratchCards) {
         long count = 0;
         int[] wonScratchCards = new int[scratchCards.size()];
         for (int i = 0; i < wonScratchCards.length; i++) {
@@ -26,6 +33,6 @@ public class Day04 {
                 }
             }
         }
-        System.out.println(count);
+        return count;
     }
 }
