@@ -16,15 +16,16 @@ public class Day04 {
         }
         System.out.println(result);
 
-        List<ScratchCard> wonScratchCards = new ArrayList<>(scratchCards);
-        for (int i = 0; i < wonScratchCards.size(); i++) {
-            int won = wonScratchCards.get(i).won();
-            for (int j = wonScratchCards.get(i).cardNumber(); j < wonScratchCards.get(i).cardNumber() + won; j++) {
+        long count = 0;
+        int[] wonScratchCards = new int[scratchCards.size()];
+        for (int i = 0; i < wonScratchCards.length; i++) {
+            count += wonScratchCards[i] + 1;
+            for (int j = scratchCards.get(i).cardNumber(); j < scratchCards.get(i).cardNumber() + scratchCards.get(i).won(); j++) {
                 if (j < scratchCards.size()) {
-                    wonScratchCards.add(scratchCards.get(j));
+                    wonScratchCards[j] += wonScratchCards[i] + 1;
                 }
             }
         }
-        System.out.println(wonScratchCards.size());
+        System.out.println(count);
     }
 }
