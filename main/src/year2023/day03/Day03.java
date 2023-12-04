@@ -1,4 +1,4 @@
-package day03;
+package year2023.day03;
 
 import util.MutableLong;
 import util.Util;

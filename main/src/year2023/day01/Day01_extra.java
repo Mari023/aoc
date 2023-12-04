@@ -1,4 +1,4 @@
-package day01;
+package year2023.day01;
 
 public class Day01_extra {
     public static void main(String[] args) {

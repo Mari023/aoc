@@ -1,4 +1,4 @@
-package day02;
+package year2023.day02;
 
 public record Game(int ID, Round[] rounds) {
     public boolean isPossible(int red, int green, int blue) {

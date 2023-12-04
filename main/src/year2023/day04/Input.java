@@ -1,4 +1,4 @@
-package day04;
+package year2023.day04;
 
 public class Input {
     public static final String[] INPUT = """
