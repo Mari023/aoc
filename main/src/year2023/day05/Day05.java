@@ -2,6 +2,7 @@ package year2023.day05;
 
 import util.Util;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class Day05 {
@@ -14,7 +15,7 @@ public class Day05 {
     private static final RangeMap humidityToLocation = new RangeMap();
 
     public static void main(String[] args) {
-        var seeds = new TreeSet<Long>();
+        var seeds = new ArrayList<Long>();
 
         Util.loopS(Input.INPUT, (block, i) -> {
             if (i == 0) {
@@ -29,7 +30,9 @@ public class Day05 {
             }
         });
 
-        var locations = humidityToLocation.map(temperatureToHumidity.map(lightToTemperature.map(waterToLight.map(fertilizerToWater.map(soilToFertilizer.map(seedToSoil.map(seeds)))))));
+        var seedSet = new TreeSet<>(seeds);
+
+        var locations = humidityToLocation.map(temperatureToHumidity.map(lightToTemperature.map(waterToLight.map(fertilizerToWater.map(soilToFertilizer.map(seedToSoil.map(seedSet)))))));
         System.out.println(locations.first());
     }
 

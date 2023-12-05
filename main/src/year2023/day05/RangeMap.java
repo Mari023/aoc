@@ -33,7 +33,7 @@ public class RangeMap {
 
     public void put(String entryString) {
         String[] values = entryString.split(" ");
-        entries.add(new Entry(Long.parseLong(values[0]), Long.parseLong(values[1]), Long.parseLong(values[2])));
+        entries.add(new Entry(Long.parseLong(values[1]), Long.parseLong(values[0]), Long.parseLong(values[2])));
     }
 
     private record Entry(long sourceStart, long destinationStart, long range) implements Comparable<Entry> {
