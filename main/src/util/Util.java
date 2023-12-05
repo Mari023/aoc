@@ -1,6 +1,10 @@
 package util;
 
 public class Util {
+    public static long clamp(long min, long value, long max) {
+        return Math.min(Math.max(min, value), max);
+    }
+
     public static void loopS(String[] input, SiConsumer consumer) {
         for (int i = 0; i < input.length; i++) {
             consumer.accept(input[i], i);
