@@ -2,6 +2,7 @@ package year2023.day05;
 
 import util.Util;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 public class RangeMap {
@@ -18,12 +19,38 @@ public class RangeMap {
         return result;
     }
 
+    public ArrayList<Entry> mapRange(ArrayList<Entry> toMap) {
+        var result = new ArrayList<Entry>();
+        for (int i = 0; i < toMap.size(); i++) {
+            Entry key = toMap.get(i);
+            var entry = this.entries.floor(key);
+            if (entry == null) continue;
+            if (key.sourceStart() > entry.sourceStart() + entry.range()) {
+                //we are beyond the end of the entries range, but maybe the next entry is partially in our range
+                entry = this.entries.higher(entry);
+                if (entry == null) continue;
+                if (entry.sourceStart() < key.sourceStart() + key.range()) {
+                    toMap.add(new Entry(entry.sourceStart(), 0, key.range() - (entry.sourceStart() - key.sourceStart())));
+                }
+                continue;
+            }
+            long relativeEntryRange = entry.sourceStart() + entry.range() - key.sourceStart();
+
+            result.add(new Entry(entry.destinationStart() + key.sourceStart() - entry.sourceStart(), 0, Math.min(key.range(), relativeEntryRange)));
+            if (relativeEntryRange < key.range()) {
+                //we went over the end of the entry we found, but we still need to map this
+                toMap.add(new Entry(entry.sourceStart() + entry.range() + 1, 0, key.range() - relativeEntryRange - 1));
+            }
+        }
+        return result;
+    }
+
     public void put(String entryString) {
         String[] values = entryString.split(" ");
         entries.add(new Entry(Long.parseLong(values[1]), Long.parseLong(values[0]), Long.parseLong(values[2])));
     }
 
-    private record Entry(long sourceStart, long destinationStart, long range) implements Comparable<Entry> {
+    public record Entry(long sourceStart, long destinationStart, long range) implements Comparable<Entry> {
         private Entry(long start) {
             this(start, start, -1);
         }

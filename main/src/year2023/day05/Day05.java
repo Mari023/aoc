@@ -34,6 +34,17 @@ public class Day05 {
 
         var locations = humidityToLocation.map(temperatureToHumidity.map(lightToTemperature.map(waterToLight.map(fertilizerToWater.map(soilToFertilizer.map(seedToSoil.map(seedSet)))))));
         System.out.println(locations.first());
+
+        //part two
+        var seeds2 = new ArrayList<RangeMap.Entry>();
+        for (int i = 0; i < seeds.size(); i += 2) {
+            long start = seeds.get(i);
+            long range = seeds.get(i + 1);
+            seeds2.add(new RangeMap.Entry(start, 0, range));
+        }
+        var locationRanges = humidityToLocation.mapRange(temperatureToHumidity.mapRange(lightToTemperature.mapRange(waterToLight.mapRange(fertilizerToWater.mapRange(soilToFertilizer.mapRange(seedToSoil.mapRange(seeds2)))))));
+        locationRanges.sort(RangeMap.Entry::compareTo);
+        System.out.println(locationRanges.get(0).sourceStart());
     }
 
     private static RangeMap getMap(String name) {
