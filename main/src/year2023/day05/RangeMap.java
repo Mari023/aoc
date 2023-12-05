@@ -25,7 +25,7 @@ public class RangeMap {
             Entry key = toMap.get(i);
             var entry = this.entries.floor(key);
             if (entry == null) continue;
-            if (key.sourceStart() > entry.sourceStart() + entry.range()) {
+            if (key.sourceStart() >= entry.sourceStart() + entry.range()) {
                 //we are beyond the end of the entries range, but maybe the next entry is partially in our range
                 entry = this.entries.higher(entry);
                 if (entry == null) continue;
@@ -39,7 +39,7 @@ public class RangeMap {
             result.add(new Entry(entry.destinationStart() + key.sourceStart() - entry.sourceStart(), 0, Math.min(key.range(), relativeEntryRange)));
             if (relativeEntryRange < key.range()) {
                 //we went over the end of the entry we found, but we still need to map this
-                toMap.add(new Entry(entry.sourceStart() + entry.range() + 1, 0, key.range() - relativeEntryRange - 1));
+                toMap.add(new Entry(entry.sourceStart() + entry.range(), 0, key.range() - relativeEntryRange));
             }
         }
         return result;
