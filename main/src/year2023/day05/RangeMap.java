@@ -7,19 +7,6 @@ import java.util.TreeSet;
 public class RangeMap {
     private final TreeSet<Entry> entries = new TreeSet<>();
 
-    public boolean containsKey(long key) {
-        var entry = entries.floor(new Entry(key));
-        if (entry == null) return false;
-        return entry.range() >= key - entry.sourceStart();
-    }
-
-    public long map(long key) {
-        var entry = entries.floor(new Entry(key));
-        if (entry == null) throw new IndexOutOfBoundsException("Index " + key + " not in Map");
-        if (entry.range() >= key - entry.sourceStart()) return entry.destinationStart() + key - entry.sourceStart();
-        throw new IndexOutOfBoundsException("Index " + key + " not in Map, closest Entry: " + entry);
-    }
-
     public TreeSet<Long> map(TreeSet<Long> set) {
         var result = new TreeSet<Long>();
         for (Long key : set) {
