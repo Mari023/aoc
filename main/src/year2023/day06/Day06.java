@@ -17,22 +17,9 @@ public class Day06 {
     }
 
     private static long calculatePossibleSolutions(long time, long distance) {
-        return calculateMaximumTime(time, distance) - calculateMinimumTime(time, distance) + 1;
+        double sqrt = Math.sqrt(Math.pow(time / 2d, 2) - distance);
+        return (long) Math.ceil(time / 2d + sqrt) - 1 -
+                ((long) Math.floor(time / 2d - sqrt) + 1) + 1;
     }
 
-    private static long calculateMinimumTime(long time, long distanceToBeat) {
-        long minimumTime = 0;
-        for (long drawTime = time / 2; (time - drawTime) * drawTime > distanceToBeat; drawTime--) {
-            minimumTime = drawTime;
-        }
-        return minimumTime;
-    }
-
-    private static long calculateMaximumTime(long time, long distanceToBeat) {
-        long maximumTime = 0;
-        for (long drawTime = time / 2; (time - drawTime) * drawTime > distanceToBeat; drawTime++) {
-            maximumTime = drawTime;
-        }
-        return maximumTime;
-    }
 }
