@@ -3,15 +3,15 @@ package year2023.day01;
 public class Day01_extra {
     public static void main(String[] args) {
         String rawInput = Input.INPUT;
-        rawInput = rawInput.replaceAll("one", "one1one");
-        rawInput = rawInput.replaceAll("two", "two2two");
-        rawInput = rawInput.replaceAll("three", "three3three");
-        rawInput = rawInput.replaceAll("four", "four4four");
-        rawInput = rawInput.replaceAll("five", "five5five");
-        rawInput = rawInput.replaceAll("six", "six6six");
-        rawInput = rawInput.replaceAll("seven", "seven7seven");
-        rawInput = rawInput.replaceAll("eight", "eight8eight");
-        rawInput = rawInput.replaceAll("nine", "nine9nine");
+        rawInput = rawInput.replaceAll("one", "o1e");
+        rawInput = rawInput.replaceAll("two", "t2o");
+        rawInput = rawInput.replaceAll("three", "t3e");
+        rawInput = rawInput.replaceAll("four", "4");
+        rawInput = rawInput.replaceAll("five", "5e");
+        rawInput = rawInput.replaceAll("six", "6");
+        rawInput = rawInput.replaceAll("seven", "7n");
+        rawInput = rawInput.replaceAll("eight", "e8t");
+        rawInput = rawInput.replaceAll("nine", "n9e");
         rawInput = rawInput.replaceAll("[a-z]+", "");
         String[] inputs = rawInput.split("\n");
 
