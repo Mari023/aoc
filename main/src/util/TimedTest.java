@@ -7,6 +7,8 @@ import year2023.day03.Day03;
 import year2023.day04.Day04;
 import year2023.day05.Day05;
 import year2023.day06.Day06;
+import year2023.day07.Day07;
+import year2023.day07.part2.Day07Part2;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -33,5 +35,7 @@ public class TimedTest {
         Day04.main(null);
         Day05.main(null);
         Day06.main(null);
+        Day07.main(null);
+        Day07Part2.main(null);
     }
 }
