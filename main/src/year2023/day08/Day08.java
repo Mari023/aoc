@@ -1,11 +1,12 @@
 package year2023.day08;
 
+import util.MutableLong;
+
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Day08 {
-
-    public static boolean DAY08_PART2_DISABLED = true;
+    public static boolean DAY08_PART2_DISABLED = false;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         String directions = Input.INPUT[0];
@@ -58,8 +59,8 @@ public class Day08 {
 
         long step = directions.length();
         for (var e : nodes.entrySet()) {
-            Node n = e.getValue();
-            steps = 0;
+            Node n = e.getValue().instructions;
+            steps = step;
             while (!endNodes.contains(n)) {
                 n = n.instructions;
                 steps += step;
@@ -67,17 +68,30 @@ public class Day08 {
             e.getValue().nextEndNode = n;
             e.getValue().stepsToEndNode = steps;
         }
-        steps = 0;
-        while (!endNodes.containsAll(startNodes)) {
-            /*if (directions.charAt((int) (steps % directions.length())) == 'L') {
-                startNodes.replaceAll(Node::left);
-            } else {
-                startNodes.replaceAll(Node::right);
-            }*/
-            steps += step;
-            startNodes.replaceAll(Node::applyInstructions);
 
+        long[] count = new long[startNodes.size()];
+        Object[] currentNodes = startNodes.toArray();
+        MutableLong mostSteps = new MutableLong(1);
+        while (count[0] == 0 || hasDifferentValues(count)) {
+            for (int i = 0; i < currentNodes.length; i++) {
+                Node n = (Node) currentNodes[i];
+                if (count[i] <= mostSteps.get()) {
+                    count[i] += n.stepsToEndNode;
+                    if (count[i] > mostSteps.get()) {
+                        mostSteps.set(count[i]);
+                    }
+                    currentNodes[i] = n.nextEndNode;
+                }
+            }
         }
-        System.out.println(steps);
+        System.out.println(count[0]);
+    }
+
+    private static boolean hasDifferentValues(long[] longs) {
+        long i = longs[0];
+        for (long j : longs) {
+            if (i != j) return true;
+        }
+        return false;
     }
 }
