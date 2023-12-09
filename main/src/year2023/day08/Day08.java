@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Day08 {
+
+    public static boolean DAY08_PART2_DISABLED = true;
+
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         String directions = Input.INPUT[0];
         Map<String, Node> nodes = new HashMap<>();
@@ -29,6 +32,7 @@ public class Day08 {
             steps++;
         }
         System.out.println(steps);
+        if (DAY08_PART2_DISABLED) return;
 
         List<Node> startNodes = new ArrayList<>();
         Set<Node> endNodes = new HashSet<>();
