@@ -30,11 +30,10 @@ public class Day09 {
             data.add(getDerivative(data.get(data.size() - 1)));
         }
         long prediction = 0;
-        for (int i = data.size() - 1; i > 0; i--) {
+        for (int i = data.size() - 1; i >= 0; i--) {
             var derivative = data.get(i);
             prediction += derivative.get(derivative.size() - 1);
         }
-        printList(data);
         return prediction;
     }
 
@@ -52,11 +51,5 @@ public class Day09 {
             if (i != j) return false;
         }
         return true;
-    }
-
-    private static void printList(List<List<Long>> list) {
-        for (var l : list) {
-            System.out.println(l.toString());
-        }
     }
 }
