@@ -16,23 +16,28 @@ public class Day09 {
             }
         }
 
-        long result = 0;
+        long result1 = 0;
+        long result2 = 0;
         for (List<Long> datum : data) {
-            result += getNext(datum);
+            long[] prediction = getNext(datum);
+            result1 += prediction[0];
+            result2 += prediction[1];
         }
-        System.out.println(result);
+        System.out.println(result1);
+        System.out.println(result2);
     }
 
-    private static long getNext(List<Long> list) {
+    private static long[] getNext(List<Long> list) {
         List<List<Long>> data = new ArrayList<>();
         data.add(list);
         while (!isAllSame(data.get(data.size() - 1))) {
             data.add(getDerivative(data.get(data.size() - 1)));
         }
-        long prediction = 0;
+        long[] prediction = new long[2];
         for (int i = data.size() - 1; i >= 0; i--) {
             var derivative = data.get(i);
-            prediction += derivative.get(derivative.size() - 1);
+            prediction[0] += derivative.get(derivative.size() - 1);
+            prediction[1] = derivative.get(0) - prediction[1];
         }
         return prediction;
     }
