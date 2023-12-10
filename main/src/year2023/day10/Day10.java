@@ -43,7 +43,35 @@ public class Day10 {
         Position end = positions.get(0);
         pipes[end.y()][end.x()] = 'E';
         if (TimedTest.PRINT) printPipes(pipes);
+
+        int area = 0;
+        for (int i = 0; i < pipes.length; i++) {
+            char[] line = pipes[i];
+            boolean inHorizontally = false;
+            for (int j = 0; j < line.length; j++) {
+                switch (line[j]) {
+                    case '┃', 'E' -> //hardcoded to my solution, since E is a ┃ for me
+                            inHorizontally = !inHorizontally;
+                    case '┗', 'S' -> //hardcoded to my solution, since S is a ┗ for me
+                            inHorizontally = !inHorizontally;
+                    case '┏', '┓', '━' -> {
+                    }
+                    case '┛' -> inHorizontally = !inHorizontally;
+                    default -> {
+                        if (inHorizontally) {
+                            pipes[i][j] = '■';
+                            area++;
+                        } else {
+                            pipes[i][j] = '□';
+                        }
+                    }
+                }
+            }
+        }
+
+        if (TimedTest.PRINT) printPipes(pipes);
         System.out.println(positions.get(0).steps());
+        System.out.println(area);
     }
 
     public static void replaceChar(char[][] pipes, int x, int y) {
