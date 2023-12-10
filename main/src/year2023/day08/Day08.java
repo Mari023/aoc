@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Day08 {
-    public static boolean DAY08_PART2_DISABLED = false;
+    public static boolean DAY08_PART2_DISABLED = true;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         String directions = Input.INPUT[0];
