@@ -13,6 +13,7 @@ import year2023.day08.Day08;
 import year2023.day09.Day09;
 import year2023.day10.Day10;
 import year2023.day11.Day11;
+import year2023.day12.Day12;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -23,7 +24,7 @@ public class TimedTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         PRINT = false;
-        long[] times = new long[1000];
+        long[] times = new long[100];
         for (int i = 0; i < times.length; i++) {
             long time = System.nanoTime();
             time();
@@ -49,5 +50,6 @@ public class TimedTest {
         Day09.main(null);
         Day10.main(null);
         Day11.main(null);
+        Day12.main(null);
     }
 }
