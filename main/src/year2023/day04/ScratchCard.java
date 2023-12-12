@@ -2,13 +2,20 @@ package year2023.day04;
 
 import util.Util;
 
+import java.util.regex.Pattern;
+
 public record ScratchCard(int cardNumber, int[] picked, int[] correct, int won) {
+    private static final Pattern PIPE = Pattern.compile(" \\| +");
+    private static final Pattern COLON = Pattern.compile(": +");
+    private static final Pattern CARD = Pattern.compile("Card +");
+    private static final Pattern SPACE = Pattern.compile(" +");
+
     public static ScratchCard create(String s) {
-        String[] columns = s.split(" \\| +");
-        String[] column1 = columns[0].split(": +");
-        int cardNumber = Integer.parseInt(column1[0].replaceAll("Card +", ""));
-        String[] pickedStrings = column1[1].split(" +");
-        String[] correctStrings = columns[1].split(" +");
+        String[] columns = PIPE.split(s);
+        String[] column1 = COLON.split(columns[0]);
+        int cardNumber = Integer.parseInt(CARD.matcher(column1[0]).replaceAll(""));
+        String[] pickedStrings = SPACE.split(column1[1]);
+        String[] correctStrings = SPACE.split(columns[1]);
         int[] picked = new int[pickedStrings.length];
         int[] correct = new int[correctStrings.length];
 
