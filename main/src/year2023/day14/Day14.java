@@ -3,12 +3,16 @@ package year2023.day14;
 import util.TimedTest;
 import util.Util;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Day14 {
     private static final Pattern NOTROCK = Pattern.compile("[#.]+");
+    private static final int CYCLE_LENGTH = 2 * 2 * 3 * 3 * 5 * 5 * 7;
+    private static final int TOTAL_CYCLES = 1000000000;
 
     public static void main(String[] args) {
+        //TODO make the array 1D instead
         char[][] input = new char[Input.INPUT.length][];
         for (int i = 0; i < Input.INPUT.length; i++) {
             input[i] = Input.INPUT[i].toCharArray();
@@ -20,17 +24,31 @@ public class Day14 {
 
 
         rollLeft(input);
-        if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        if (TimedTest.PRINT) {
+            System.out.println();
+            Util.printCharArrayArray(input);
+        }
         rollDown(input);
-        if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        if (TimedTest.PRINT) {
+            System.out.println();
+            Util.printCharArrayArray(input);
+        }
         rollRight(input);
-        if (TimedTest.PRINT) Util.printCharArrayArray(input);
-        for (int i = 0; i < 1000000000; i++) {
-            //TODO primitive cycle detection
-            rollUp(input);
-            rollLeft(input);
-            rollDown(input);
-            rollRight(input);
+        if (TimedTest.PRINT) {
+            System.out.println();
+            Util.printCharArrayArray(input);
+            System.out.println();
+        }
+        for (int i = 0; i < TOTAL_CYCLES; i += CYCLE_LENGTH) {
+            var copy = clone(input);
+            int j = 0;
+            for (; j < CYCLE_LENGTH && i + j < TOTAL_CYCLES; j++) {
+                rollUp(input);
+                rollLeft(input);
+                rollDown(input);
+                rollRight(input);
+            }
+            if (Arrays.deepEquals(input, copy)) break;
         }
 
         if (TimedTest.PRINT) Util.printCharArrayArray(input);
@@ -43,6 +61,14 @@ public class Day14 {
             load += (long) NOTROCK.matcher(new String(rocks[i])).replaceAll("").length() * (rocks.length - i);
         }
         return load;
+    }
+
+    private static char[][] clone(char[][] rocks) {
+        var clone = rocks.clone();
+        for (int i = 0; i < clone.length; i++) {
+            clone[i] = clone[i].clone();
+        }
+        return clone;
     }
 
     private static void rollUp(char[][] rocks) {
