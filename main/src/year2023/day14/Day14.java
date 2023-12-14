@@ -1,9 +1,7 @@
 package year2023.day14;
 
 import util.TimedTest;
-import util.Util;
 
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Day14 {
@@ -12,68 +10,56 @@ public class Day14 {
     private static final int TOTAL_CYCLES = 1000000000;
 
     public static void main(String[] args) {
-        //TODO make the array 1D instead
-        char[][] input = new char[Input.INPUT.length][];
-        for (int i = 0; i < Input.INPUT.length; i++) {
-            input[i] = Input.INPUT[i].toCharArray();
-        }
-        rollUp(input);
+        var rocks = new RockField(Input.INPUT);
+        rollUp(rocks);
 
-        if (TimedTest.PRINT) Util.printCharArrayArray(input);
-        System.out.println(calculateNorthLoad(input));
+        if (TimedTest.PRINT) System.out.println(rocks);
+        System.out.println(calculateNorthLoad(rocks));
 
 
-        rollLeft(input);
+        rollLeft(rocks);
         if (TimedTest.PRINT) {
             System.out.println();
-            Util.printCharArrayArray(input);
+            System.out.println(rocks);
         }
-        rollDown(input);
+        rollDown(rocks);
         if (TimedTest.PRINT) {
             System.out.println();
-            Util.printCharArrayArray(input);
+            System.out.println(rocks);
         }
-        rollRight(input);
+        rollRight(rocks);
         if (TimedTest.PRINT) {
             System.out.println();
-            Util.printCharArrayArray(input);
+            System.out.println(rocks);
             System.out.println();
         }
         for (int i = 0; i < TOTAL_CYCLES; i += CYCLE_LENGTH) {
-            var copy = clone(input);
+            var copy = new RockField(rocks);
             int j = 0;
             for (; j < CYCLE_LENGTH && i + j < TOTAL_CYCLES; j++) {
-                rollUp(input);
-                rollLeft(input);
-                rollDown(input);
-                rollRight(input);
+                rollUp(rocks);
+                rollLeft(rocks);
+                rollDown(rocks);
+                rollRight(rocks);
             }
-            if (Arrays.deepEquals(input, copy)) break;
+            if (rocks.equals(copy)) break;
         }
 
-        if (TimedTest.PRINT) Util.printCharArrayArray(input);
-        System.out.println(calculateNorthLoad(input));
+        if (TimedTest.PRINT) System.out.println(rocks);
+        System.out.println(calculateNorthLoad(rocks));
     }
 
-    private static long calculateNorthLoad(char[][] rocks) {
+    private static long calculateNorthLoad(RockField rocks) {
         long load = 0;
-        for (int i = 0; i < rocks.length; i++) {
-            load += (long) NOTROCK.matcher(new String(rocks[i])).replaceAll("").length() * (rocks.length - i);
+        for (int i = 0; i < rocks.getRows(); i++) {
+            load += (long) NOTROCK.matcher(new String(rocks.getRow(i))).replaceAll("").length() * (rocks.getRows() - i);
         }
         return load;
     }
 
-    private static char[][] clone(char[][] rocks) {
-        var clone = rocks.clone();
-        for (int i = 0; i < clone.length; i++) {
-            clone[i] = clone[i].clone();
-        }
-        return clone;
-    }
-
-    private static void rollUp(char[][] rocks) {
-        for (int i = 1; i < rocks.length; i++) {
-            for (int j = 0; j < rocks[i].length; j++) {
+    private static void rollUp(RockField rocks) {
+        for (int i = 1; i < rocks.getRows(); i++) {
+            for (int j = 0; j < rocks.getColumns(); j++) {
                 int y = i;
                 while (rollUp(rocks, j, y)) {
                     y--;
@@ -82,20 +68,20 @@ public class Day14 {
         }
     }
 
-    private static boolean rollUp(char[][] rocks, int x, int y) {
+    private static boolean rollUp(RockField rocks, int x, int y) {
         if (y == 0) return false;
 
-        if (rocks[y][x] == 'O' && rocks[y - 1][x] == '.') {
-            rocks[y][x] = '.';
-            rocks[y - 1][x] = 'O';
+        if (rocks.get(x, y) == 'O' && rocks.get(x, y - 1) == '.') {
+            rocks.set(x, y, '.');
+            rocks.set(x, y - 1, 'O');
             return true;
         }
         return false;
     }
 
-    private static void rollDown(char[][] rocks) {
-        for (int i = rocks.length - 2; i >= 0; i--) {
-            for (int j = 0; j < rocks[i].length; j++) {
+    private static void rollDown(RockField rocks) {
+        for (int i = rocks.getRows() - 2; i >= 0; i--) {
+            for (int j = 0; j < rocks.getColumns(); j++) {
                 int y = i;
                 while (rollDown(rocks, j, y)) {
                     y++;
@@ -104,21 +90,21 @@ public class Day14 {
         }
     }
 
-    private static boolean rollDown(char[][] rocks, int x, int y) {
-        if (y == rocks.length - 1) return false;
+    private static boolean rollDown(RockField rocks, int x, int y) {
+        if (y == rocks.getRows() - 1) return false;
 
-        if (rocks[y][x] == 'O' && rocks[y + 1][x] == '.') {
-            rocks[y][x] = '.';
-            rocks[y + 1][x] = 'O';
+        if (rocks.get(x, y) == 'O' && rocks.get(x, y + 1) == '.') {
+            rocks.set(x, y, '.');
+            rocks.set(x, y + 1, 'O');
             return true;
         }
         return false;
     }
 
 
-    private static void rollLeft(char[][] rocks) {
-        for (int j = 1; j < rocks[0].length; j++) {
-            for (int i = 0; i < rocks.length; i++) {
+    private static void rollLeft(RockField rocks) {
+        for (int j = 1; j < rocks.getColumns(); j++) {
+            for (int i = 0; i < rocks.getRows(); i++) {
                 int x = j;
                 while (rollLeft(rocks, x, i)) {
                     x--;
@@ -128,21 +114,21 @@ public class Day14 {
     }
 
 
-    private static boolean rollLeft(char[][] rocks, int x, int y) {
+    private static boolean rollLeft(RockField rocks, int x, int y) {
         if (x == 0) return false;
 
-        if (rocks[y][x] == 'O' && rocks[y][x - 1] == '.') {
-            rocks[y][x] = '.';
-            rocks[y][x - 1] = 'O';
+        if (rocks.get(x, y) == 'O' && rocks.get(x - 1, y) == '.') {
+            rocks.set(x, y, '.');
+            rocks.set(x - 1, y, 'O');
             return true;
         }
         return false;
     }
 
 
-    private static void rollRight(char[][] rocks) {
-        for (int j = rocks[0].length - 2; j >= 0; j--) {
-            for (int i = 0; i < rocks.length; i++) {
+    private static void rollRight(RockField rocks) {
+        for (int j = rocks.getColumns() - 2; j >= 0; j--) {
+            for (int i = 0; i < rocks.getRows(); i++) {
                 int x = j;
                 while (rollRight(rocks, x, i)) {
                     x++;
@@ -152,12 +138,12 @@ public class Day14 {
     }
 
 
-    private static boolean rollRight(char[][] rocks, int x, int y) {
-        if (x == rocks[y].length - 1) return false;
+    private static boolean rollRight(RockField rocks, int x, int y) {
+        if (x == rocks.getColumns() - 1) return false;
 
-        if (rocks[y][x] == 'O' && rocks[y][x + 1] == '.') {
-            rocks[y][x] = '.';
-            rocks[y][x + 1] = 'O';
+        if (rocks.get(x, y) == 'O' && rocks.get(x + 1, y) == '.') {
+            rocks.set(x, y, '.');
+            rocks.set(x + 1, y, 'O');
             return true;
         }
         return false;
