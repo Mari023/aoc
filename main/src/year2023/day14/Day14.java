@@ -27,7 +27,7 @@ public class Day14 {
             System.out.println(rocks);
             System.out.println();
         }
-        for (int i = 0; i < TOTAL_CYCLES; i += CYCLE_LENGTH) {
+        for (int i = 1; i < TOTAL_CYCLES; i += CYCLE_LENGTH) {
             var copy = new RockField(rocks);
             int j = 0;
             for (; j < CYCLE_LENGTH && i + j < TOTAL_CYCLES; j++) {
@@ -36,7 +36,10 @@ public class Day14 {
                 rocks.rollDown();
                 rocks.rollRight();
             }
-            if (rocks.equals(copy)) break;
+            if (rocks.equals(copy)) {
+                System.out.println("cycle found: " + i);
+                break;
+            }
         }
 
         if (TimedTest.PRINT) System.out.println(rocks);
