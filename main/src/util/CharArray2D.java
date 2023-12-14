@@ -5,10 +5,12 @@ import java.util.Arrays;
 public class CharArray2D {
     private final char[] chars;
     private final int columns;
+    private final int rows;
 
     public CharArray2D(int x, int y) {
         this.chars = new char[y * x];
         columns = y;
+        rows = chars.length / columns;
     }
 
     public CharArray2D(CharArray2D array) {
@@ -18,14 +20,13 @@ public class CharArray2D {
     public CharArray2D(char[] chars, int columns) {
         this.chars = chars.clone();
         this.columns = columns;
+        rows = chars.length / columns;
     }
 
     public CharArray2D(String[] strings) {
         this(strings.length, strings[0].length());
-        for (int y = 0; y < strings.length; y++) {
-            for (int x = 0; x < strings[y].length(); x++) {
-                chars[x + y * columns] = strings[y].charAt(x);
-            }
+        for (int i = 0; i < strings.length; i++) {
+            System.arraycopy(strings[i].toCharArray(), 0, chars, rows*i, columns);
         }
     }
 
@@ -42,7 +43,7 @@ public class CharArray2D {
     }
 
     public int getRows() {
-        return chars.length / columns;
+        return rows;
     }
 
     public char[] getRow(int y) {
