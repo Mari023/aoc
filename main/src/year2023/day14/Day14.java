@@ -16,7 +16,24 @@ public class Day14 {
         rollUp(input);
 
         if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        System.out.println(calculateNorthLoad(input));
 
+
+        rollLeft(input);
+        if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        rollDown(input);
+        if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        rollRight(input);
+        if (TimedTest.PRINT) Util.printCharArrayArray(input);
+        for (int i = 0; i < 1000000000; i++) {
+            //TODO primitive cycle detection
+            rollUp(input);
+            rollLeft(input);
+            rollDown(input);
+            rollRight(input);
+        }
+
+        if (TimedTest.PRINT) Util.printCharArrayArray(input);
         System.out.println(calculateNorthLoad(input));
     }
 
@@ -67,6 +84,54 @@ public class Day14 {
         if (rocks[y][x] == 'O' && rocks[y + 1][x] == '.') {
             rocks[y][x] = '.';
             rocks[y + 1][x] = 'O';
+            return true;
+        }
+        return false;
+    }
+
+
+    private static void rollLeft(char[][] rocks) {
+        for (int j = 1; j < rocks[0].length; j++) {
+            for (int i = 0; i < rocks.length; i++) {
+                int x = j;
+                while (rollLeft(rocks, x, i)) {
+                    x--;
+                }
+            }
+        }
+    }
+
+
+    private static boolean rollLeft(char[][] rocks, int x, int y) {
+        if (x == 0) return false;
+
+        if (rocks[y][x] == 'O' && rocks[y][x - 1] == '.') {
+            rocks[y][x] = '.';
+            rocks[y][x - 1] = 'O';
+            return true;
+        }
+        return false;
+    }
+
+
+    private static void rollRight(char[][] rocks) {
+        for (int j = rocks[0].length - 2; j >= 0; j--) {
+            for (int i = 0; i < rocks.length; i++) {
+                int x = j;
+                while (rollRight(rocks, x, i)) {
+                    x++;
+                }
+            }
+        }
+    }
+
+
+    private static boolean rollRight(char[][] rocks, int x, int y) {
+        if (x == rocks[y].length - 1) return false;
+
+        if (rocks[y][x] == 'O' && rocks[y][x + 1] == '.') {
+            rocks[y][x] = '.';
+            rocks[y][x + 1] = 'O';
             return true;
         }
         return false;
