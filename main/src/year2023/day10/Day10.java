@@ -11,7 +11,7 @@ public class Day10 {
     public static void main(String[] args) {
         char[][] pipes = new char[Input.INPUT.length][Input.INPUT[0].length()];
         if (TimedTest.PRINT) {
-            printPipes(pipes);
+            Util.printCharArrayArray(pipes);
             System.out.println();
         }
 
@@ -42,7 +42,7 @@ public class Day10 {
         }
         Position end = positions.get(0);
         pipes[end.y()][end.x()] = 'E';
-        if (TimedTest.PRINT) printPipes(pipes);
+        if (TimedTest.PRINT) Util.printCharArrayArray(pipes);
 
         int area = 0;
         for (int i = 0; i < pipes.length; i++) {
@@ -69,7 +69,7 @@ public class Day10 {
             }
         }
 
-        if (TimedTest.PRINT) printPipes(pipes);
+        if (TimedTest.PRINT) Util.printCharArrayArray(pipes);
         System.out.println(positions.get(0).steps());
         System.out.println(area);
     }
@@ -85,11 +85,5 @@ public class Day10 {
             case '╔' -> '┏';
             default -> c;
         };
-    }
-
-    public static void printPipes(char[][] pipes) {
-        for (char[] pipe : pipes) {
-            System.out.println(new String(pipe));
-        }
     }
 }

@@ -5,6 +5,12 @@ public class Util {
         return Math.min(Math.max(min, value), max);
     }
 
+    public static void printCharArrayArray(char[][] chars) {
+        for (char[] c : chars) {
+            System.out.println(new String(c));
+        }
+    }
+
     public static void loopS(String[] input, SiConsumer consumer) {
         for (int i = 0; i < input.length; i++) {
             consumer.accept(input[i], i);
