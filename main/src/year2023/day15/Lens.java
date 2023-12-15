@@ -25,11 +25,7 @@ public class Lens {
             code = l[0];
             focalLength = Integer.parseInt(l[1]);
         }
-        int hash = 0;
-        for (int i = 0; i < lens.length(); i++) {
-            hash = ((hash + lens.charAt(i)) * 17) % 256;
-        }
-        return new Lens(code, hash, focalLength, isSubtractive);
+        return new Lens(code, hash(code), focalLength, isSubtractive);
     }
 
     @Override
@@ -40,5 +36,13 @@ public class Lens {
                 ", FocalLength=" + focalLength +
                 ", isSubtractive=" + isSubtractive +
                 '}';
+    }
+
+    public static int hash(String s) {
+        int hash = 0;
+        for (int i = 0; i < s.length(); i++) {
+            hash = ((hash + s.charAt(i)) * 17) % 256;
+        }
+        return hash;
     }
 }

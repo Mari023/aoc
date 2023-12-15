@@ -17,7 +17,7 @@ public class HASHMAP {
     public long focusingPower() {
         long focusingPower = 0;
         for (int i = 0; i < boxes.length; i++) {
-            focusingPower = (i + 1) * boxes[i].focusingPower();
+            focusingPower += (i + 1) * boxes[i].focusingPower();
         }
         return focusingPower;
     }

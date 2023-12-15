@@ -9,10 +9,9 @@ public class Day15 {
     public static void main(String[] args) {
         List<Lens> lenses = new ArrayList<>();
         long solution = 0;
-        for (String s : Input.TEST) {
-            Lens l = Lens.of(s);
-            lenses.add(l);
-            solution += l.hash;
+        for (String s : Input.INPUT) {
+            lenses.add(Lens.of(s));
+            solution += Lens.hash(s);
         }
         System.out.println(solution);
 

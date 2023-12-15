@@ -12,7 +12,7 @@ public class Box {
             int index = lensCodes.indexOf(lens.code);
             lenses.remove(index);
             lensCodes.remove(index);
-        } else {
+        } else if(!lens.isSubtractive) {
             if (lensCodes.contains(lens.code)) {
                 lenses.set(lensCodes.indexOf(lens.code), lens);
             } else {
