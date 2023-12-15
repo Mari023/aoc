@@ -18,7 +18,7 @@ public class Lens {
         int focalLength = 0;
         boolean isSubtractive = false;
         if (lens.endsWith("-")) {
-            code = lens.replaceAll("-", "");
+            code = lens.substring(0, lens.length() - 2);
             isSubtractive = true;
         } else {
             var l = lens.split("=");
