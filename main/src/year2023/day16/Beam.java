@@ -11,10 +11,6 @@ public class Beam {
         this.direction = direction;
     }
 
-    public Beam() {
-        this(0, 0, Direction.East);
-    }
-
     public Beam(Beam beam, Direction direction) {
         this(beam.x, beam.y, direction);
     }

@@ -1,17 +1,36 @@
 package year2023.day16;
 
+import util.TimedTest;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Day16 {
     public static void main(String[] args) {
         var input = Input.INPUT;
+        System.out.println(energize(input, 0, 0, Beam.Direction.East));
+
+        if(!TimedTest.PRINT) return;//don't run part 2 in tests
+
+        long energized = 0;
+        for (int i = 0; i < input.length; i++) {
+            energized = Math.max(energized, energize(input, 0, i, Beam.Direction.East));
+            energized = Math.max(energized, energize(input, input[i].length() - 1, i, Beam.Direction.West));
+        }
+        for (int i = 0; i < input[0].length(); i++) {
+            energized = Math.max(energized, energize(input, i, 0, Beam.Direction.South));
+            energized = Math.max(energized, energize(input, i, input.length - 1, Beam.Direction.North));
+        }
+        System.out.println(energized);
+    }
+
+    private static long energize(String[] input, int startX, int startY, Beam.Direction startDirection) {
         int xBound = input[0].length();
         int yBound = input.length;
         boolean[][] energized = new boolean[yBound][xBound];
         int[][] passed = new int[yBound][xBound];
         List<Beam> beams = new ArrayList<>();
-        beams.add(new Beam());
+        beams.add(new Beam(startX, startY, startDirection));
         while (!beams.isEmpty()) {
             Beam beam = beams.get(0);
             if (beam.outOfBounds(xBound, yBound)) {
@@ -35,7 +54,12 @@ public class Day16 {
                 if (b) solution++;
             }
         }
-        System.out.println(solution);
+        if (TimedTest.PRINT) {
+            printEnergized(energized);
+            System.out.println(solution);
+            System.out.println();
+        }
+        return solution;
     }
 
     private static void printEnergized(boolean[][] energized) {
@@ -50,6 +74,6 @@ public class Day16 {
             }
             s.append('\n');
         }
-        System.out.println(s);
+        System.out.print(s);
     }
 }
