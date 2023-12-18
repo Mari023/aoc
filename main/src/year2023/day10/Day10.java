@@ -10,11 +10,6 @@ import java.util.List;
 public class Day10 {
     public static void main(String[] args) {
         char[][] pipes = new char[Input.INPUT.length][Input.INPUT[0].length()];
-        if (TimedTest.PRINT) {
-            Util.printCharArrayArray(pipes);
-            System.out.println();
-        }
-
         MutableLong startX = new MutableLong();
         MutableLong startY = new MutableLong();
         Util.loopSC(Input.INPUT, (s, c, i, j) -> {
@@ -24,6 +19,10 @@ public class Day10 {
                 startY.set(i);
             }
         });
+        if (TimedTest.PRINT) {
+            Util.printCharArrayArray(pipes);
+            System.out.println();
+        }
 
         List<Position> positions = new ArrayList<>();
         positions.add(new Position((int) startX.get(), (int) startY.get()).move(Position.Direction.N));
