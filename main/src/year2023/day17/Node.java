@@ -1,7 +1,5 @@
 package year2023.day17;
 
-import year2023.day10.Position;
-
 public class Node implements Comparable<Node> {
     public final int x;
     public final int y;
@@ -11,10 +9,6 @@ public class Node implements Comparable<Node> {
     public Node previous = null;
     public Position.Direction previousDirection = Position.Direction.NONE;
     public boolean visited = false;
-    public Node right = null;
-    public Node down = null;
-    public Node left = null;
-    public Node up = null;
 
     public Node(int x, int y, int heatLoss) {
         this.x = x;
