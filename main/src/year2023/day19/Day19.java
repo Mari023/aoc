@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Day19 {
+    private static final boolean DAY19_PART2_DISABLED = true;
     public static void main(String[] args) {
         String[] input = Input.INPUT;
         String[] instructionStrings = input[0].split("\n");
@@ -24,17 +25,9 @@ public class Day19 {
         }
         List<Part> accepted = new ArrayList<>();
 
-        Instruction firstInstruction = workflows.get("in");
+        Instruction startingInstruction = workflows.get("in");
         for (Part part : parts) {
-            Instruction instruction = firstInstruction;
-            Result result = new Result(Result.Type.MOVED, instruction.name());
-            while (result.type() == Result.Type.MOVED) {
-                result = instruction.apply(part);
-                instruction = workflows.get(result.workflow());
-                if (result.type() == Result.Type.MOVED && instruction == null)
-                    throw new IllegalStateException("Result referred to instruction \"" + result.workflow() + "\", but it doesn't exist");
-            }
-            if (result.type() == Result.Type.ACCEPTED) accepted.add(part);
+            if (handlePart(part, startingInstruction, workflows).type() == Result.Type.ACCEPTED) accepted.add(part);
         }
 
         long solution = 0;
@@ -42,5 +35,30 @@ public class Day19 {
             solution += p.rating();
         }
         System.out.println(solution);
+
+        if(DAY19_PART2_DISABLED) return;
+        solution = 0;
+        for (int x = 0; x < 4000; x++) {
+            for (int m = 0; m < 4000; m++) {
+                for (int a = 0; a < 4000; a++) {
+                    for (int s = 0; s < 4000; s++) {
+                        if(handlePart(new Part(x, m, a, s), startingInstruction, workflows).type() == Result.Type.ACCEPTED) solution++;
+                    }
+                }
+            }
+        }
+        System.out.println(solution);
+    }
+
+    private static Result handlePart(Part part, Instruction startingInstruction, Map<String, Instruction> workflows) {
+        Instruction instruction = startingInstruction;
+        Result result = new Result(Result.Type.MOVED, instruction.name());
+        while (result.type() == Result.Type.MOVED) {
+            result = instruction.apply(part);
+            instruction = workflows.get(result.workflow());
+            if (result.type() == Result.Type.MOVED && instruction == null)
+                throw new IllegalStateException("Result referred to instruction \"" + result.workflow() + "\", but it doesn't exist");
+        }
+        return result;
     }
 }
