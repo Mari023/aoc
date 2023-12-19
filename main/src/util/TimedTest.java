@@ -18,6 +18,7 @@ import year2023.day14.Day14;
 import year2023.day15.Day15;
 import year2023.day16.Day16;
 import year2023.day18.Day18;
+import year2023.day19.Day19;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -61,5 +62,6 @@ public class TimedTest {
         Day16.main(null);
         //Day17.main(null);
         Day18.main(null);
+        Day19.main(null);
     }
 }
