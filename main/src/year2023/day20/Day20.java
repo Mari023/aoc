@@ -30,6 +30,7 @@ public class Day20 {
                 nextScheduledPulses = new HashMap<>();
                 for (var entry : currentScheduledPulses.entrySet()) {
                     Component component = components.get(entry.getKey());
+                    if (component == null) continue;
                     component.pulse(entry.getValue(), nextScheduledPulses);
                 }
             }
