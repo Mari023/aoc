@@ -2,12 +2,14 @@ package year2023.day20.components;
 
 import util.MutableLong;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public final class Conjunction extends Component {
     private final Map<Component, Pulse.Type> lastPulses = new HashMap<>();
+    private final Collection<Pulse.Type> lastPulseValues = lastPulses.values();
 
     public Conjunction(String name, Map<String, Component> components, MutableLong highPulses, MutableLong lowPulses, List<String> destinationModules) {
         super(name, components, highPulses, lowPulses, destinationModules);
@@ -16,14 +18,11 @@ public final class Conjunction extends Component {
     @Override
     public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
         lastPulses.put(pulse.sender(), pulse.type());
-        Pulse.Type toSend = Pulse.Type.LOW;
-        for (var entry : lastPulses.values()) {
-            if (entry == Pulse.Type.LOW) {
-                toSend = Pulse.Type.HIGH;
-                break;
-            }
+        if (lastPulseValues.contains(Pulse.Type.LOW)) {
+            sendPulse(Pulse.Type.HIGH, scheduledPulses);
+        } else {
+            sendPulse(Pulse.Type.LOW, scheduledPulses);
         }
-        sendPulse(toSend, scheduledPulses);
     }
 
     @Override

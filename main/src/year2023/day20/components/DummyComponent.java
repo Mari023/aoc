@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-final class DummyComponent extends Component {
+public final class DummyComponent extends Component {
+    private boolean receivedLowPulse = false;
     public DummyComponent(String name) {
         super(name, new HashMap<>(), new MutableLong(), new MutableLong(), new ArrayList<>());
     }
 
     @Override
-    public void pulse(Pulse pulses, List<Pulse> scheduledPulses) {
+    public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
+        if(pulse.type() == Pulse.Type.LOW) receivedLowPulse = true;
+    }
+
+    public boolean receivedLowPulse() {
+        return receivedLowPulse;
     }
 }

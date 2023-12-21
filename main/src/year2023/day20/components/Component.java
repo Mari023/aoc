@@ -25,7 +25,7 @@ public sealed abstract class Component permits Broadcaster, Button, DummyCompone
         return name;
     }
 
-    public abstract void pulse(Pulse pulses, List<Pulse> scheduledPulses);
+    public abstract void pulse(Pulse pulse, List<Pulse> scheduledPulses);
 
     protected void sendPulse(Pulse.Type type, List<Pulse> scheduledPulses) {
         switch (type) {

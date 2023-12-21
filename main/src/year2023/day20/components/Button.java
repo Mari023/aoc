@@ -11,7 +11,7 @@ public final class Button extends Component {
     }
 
     @Override
-    public void pulse(Pulse pulses, List<Pulse> scheduledPulses) {
+    public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
     }
 
     public void push(List<Pulse> scheduledPulses) {
