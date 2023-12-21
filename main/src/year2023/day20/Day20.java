@@ -14,7 +14,7 @@ public class Day20 {
     private static final int buttonPresses = 1000;
 
     public static void main(String[] args) {
-        String[] input = Input.TEST0;
+        String[] input = Input.INPUT;
         Map<String, Component> components = new HashMap<>();
         util.MutableLong highPulses = new MutableLong();
         MutableLong lowPulses = new MutableLong();
