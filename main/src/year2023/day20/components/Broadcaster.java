@@ -12,9 +12,7 @@ public final class Broadcaster extends Component {
     }
 
     @Override
-    public void pulse(List<Pulse> pulses, Map<String, List<Pulse>> scheduledPulses) {
-        for (Pulse pulse : pulses) {
-            sendPulse(pulse.type(), scheduledPulses);
-        }
+    public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
+        sendPulse(pulse.type(), scheduledPulses);
     }
 }

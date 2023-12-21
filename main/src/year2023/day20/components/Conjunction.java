@@ -18,17 +18,15 @@ public final class Conjunction extends Component {
     }
 
     @Override
-    public void pulse(List<Pulse> pulses, Map<String, List<Pulse>> scheduledPulses) {
-        for (Pulse pulse : pulses) {
-            lastPulses.put(pulse.sender().name(), pulse.type());
-            Pulse.Type toSend = Pulse.Type.LOW;
-            for (var entry : lastPulses.values()) {
-                if (entry == Pulse.Type.LOW) {
-                    toSend = Pulse.Type.HIGH;
-                    break;
-                }
+    public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
+        lastPulses.put(pulse.sender().name(), pulse.type());
+        Pulse.Type toSend = Pulse.Type.LOW;
+        for (var entry : lastPulses.values()) {
+            if (entry == Pulse.Type.LOW) {
+                toSend = Pulse.Type.HIGH;
+                break;
             }
-            sendPulse(toSend, scheduledPulses);
         }
+        sendPulse(toSend, scheduledPulses);
     }
 }

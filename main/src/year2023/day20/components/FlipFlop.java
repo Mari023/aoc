@@ -13,12 +13,10 @@ public final class FlipFlop extends Component {
     }
 
     @Override
-    public void pulse(List<Pulse> pulses, Map<String, List<Pulse>> scheduledPulses) {
-        for (Pulse pulse : pulses) {
-            if (pulse.type() == Pulse.Type.HIGH) continue;
-            isOn = !isOn;
-            if (isOn) sendPulse(Pulse.Type.HIGH, scheduledPulses);
-            else sendPulse(Pulse.Type.LOW, scheduledPulses);
-        }
+    public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
+        if (pulse.type() == Pulse.Type.HIGH) return;
+        isOn = !isOn;
+        if (isOn) sendPulse(Pulse.Type.HIGH, scheduledPulses);
+        else sendPulse(Pulse.Type.LOW, scheduledPulses);
     }
 }

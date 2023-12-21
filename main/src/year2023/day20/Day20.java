@@ -5,6 +5,7 @@ import year2023.day20.components.Button;
 import year2023.day20.components.Component;
 import year2023.day20.components.Pulse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,17 +22,17 @@ public class Day20 {
         for (String component : input) {
             Component.of(component, components, highPulses, lowPulses);
         }
-        HashMap<String, List<Pulse>> currentScheduledPulses;
-        HashMap<String, List<Pulse>> nextScheduledPulses = new HashMap<>();
+        List<Pulse> currentScheduledPulses;
+        List<Pulse> nextScheduledPulses = new ArrayList<>();
         for (int i = 0; i < buttonPresses; i++) {
             button.push(nextScheduledPulses);
             while (!nextScheduledPulses.isEmpty()) {
                 currentScheduledPulses = nextScheduledPulses;
-                nextScheduledPulses = new HashMap<>();
-                for (var entry : currentScheduledPulses.entrySet()) {
-                    Component component = components.get(entry.getKey());
+                nextScheduledPulses = new ArrayList<>();
+                for (var pulse : currentScheduledPulses) {
+                    Component component = components.get(pulse.receiver());
                     if (component == null) continue;
-                    component.pulse(entry.getValue(), nextScheduledPulses);
+                    component.pulse(pulse, nextScheduledPulses);
                 }
             }
         }

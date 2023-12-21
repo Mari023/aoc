@@ -2,7 +2,6 @@ package year2023.day20.components;
 
 import util.MutableLong;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +23,15 @@ public sealed abstract class Component permits Broadcaster, Button, Conjunction,
         return name;
     }
 
-    public abstract void pulse(List<Pulse> pulses, Map<String, List<Pulse>> scheduledPulses);
+    public abstract void pulse(Pulse pulses, List<Pulse> scheduledPulses);
 
-    protected void sendPulse(Pulse.Type type, Map<String, List<Pulse>> scheduledPulses) {
+    protected void sendPulse(Pulse.Type type, List<Pulse> scheduledPulses) {
         switch (type) {
             case HIGH -> highPulses.add(1);
             case LOW -> lowPulses.add(1);
         }
-        Pulse pulse = new Pulse(type, this);
         for (String destinationModule : destinationModules) {
-            var pulses = scheduledPulses.getOrDefault(destinationModule, new ArrayList<>());
-            pulses.add(pulse);
-            scheduledPulses.put(destinationModule, pulses);
+            scheduledPulses.add(new Pulse(type, this, destinationModule));
         }
     }
 
