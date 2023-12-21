@@ -2,10 +2,7 @@ package year2023.day20.components;
 
 import util.MutableLong;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class Conjunction extends Component {
     private final Map<Component, Pulse.Type> lastPulses = new HashMap<>();
@@ -17,7 +14,7 @@ public final class Conjunction extends Component {
 
     @Override
     public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
-        lastPulses.put(pulse.sender(), pulse.type());
+        lastPulses.replace(pulse.sender(), pulse.type());
         if (lastPulseValues.contains(Pulse.Type.LOW)) {
             sendPulse(Pulse.Type.HIGH, scheduledPulses);
         } else {

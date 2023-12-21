@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Day20 {
+    private static final boolean DAY20_PART2_DISABLED = true;
 
     public static void main(String[] args) {
         System.out.println(new Day20().part1());
+        if(DAY20_PART2_DISABLED) return;
         System.out.println(new Day20().part2());
     }
 
@@ -35,7 +37,7 @@ public class Day20 {
             Component.of(component, components, highPulses, lowPulses);
         }
         components.forEach((name, component) -> component.connectComponents(components));
-        nextScheduledPulses = new ArrayList<>();
+        nextScheduledPulses = new ArrayList<>(100);
     }
 
     private long part1() {
@@ -58,7 +60,7 @@ public class Day20 {
         button.push(nextScheduledPulses);
         while (!nextScheduledPulses.isEmpty()) {
             List<Pulse> currentScheduledPulses = nextScheduledPulses;
-            nextScheduledPulses = new ArrayList<>(32);
+            nextScheduledPulses = new ArrayList<>(100);
             for (var pulse : currentScheduledPulses) {
                 pulse.receiver().pulse(pulse, nextScheduledPulses);
             }
