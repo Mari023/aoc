@@ -7,19 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 public final class Conjunction extends Component {
-    private final Map<String, Pulse.Type> lastPulses;
+    private final Map<Component, Pulse.Type> lastPulses = new HashMap<>();
 
     public Conjunction(String name, Map<String, Component> components, MutableLong highPulses, MutableLong lowPulses, List<String> destinationModules) {
         super(name, components, highPulses, lowPulses, destinationModules);
-        lastPulses = new HashMap<>();
-        for (String destinationModule : destinationModules) {
-            lastPulses.put(destinationModule, Pulse.Type.LOW);
-        }
     }
 
     @Override
     public void pulse(Pulse pulse, List<Pulse> scheduledPulses) {
-        lastPulses.put(pulse.sender().name(), pulse.type());
+        lastPulses.put(pulse.sender(), pulse.type());
         Pulse.Type toSend = Pulse.Type.LOW;
         for (var entry : lastPulses.values()) {
             if (entry == Pulse.Type.LOW) {
@@ -28,5 +24,15 @@ public final class Conjunction extends Component {
             }
         }
         sendPulse(toSend, scheduledPulses);
+    }
+
+    @Override
+    public void connectComponents(Map<String, Component> components) {
+        super.connectComponents(components);
+        for (Component component : components.values()) {
+            if (component.destinationModuleNames.contains(name())) {
+                lastPulses.put(component, Pulse.Type.LOW);
+            }
+        }
     }
 }

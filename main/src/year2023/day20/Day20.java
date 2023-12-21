@@ -22,6 +22,7 @@ public class Day20 {
         for (String component : input) {
             Component.of(component, components, highPulses, lowPulses);
         }
+        components.forEach((name, component) -> component.connectComponents(components));
         List<Pulse> currentScheduledPulses;
         List<Pulse> nextScheduledPulses = new ArrayList<>();
         for (int i = 0; i < buttonPresses; i++) {
@@ -30,9 +31,7 @@ public class Day20 {
                 currentScheduledPulses = nextScheduledPulses;
                 nextScheduledPulses = new ArrayList<>();
                 for (var pulse : currentScheduledPulses) {
-                    Component component = components.get(pulse.receiver());
-                    if (component == null) continue;
-                    component.pulse(pulse, nextScheduledPulses);
+                    pulse.receiver().pulse(pulse, nextScheduledPulses);
                 }
             }
         }
