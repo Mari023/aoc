@@ -16,9 +16,15 @@ public class Day17 {
             }
         }
         Node target = nodes[nodes.length - 1][nodes[nodes.length - 1].length - 1];
-        unvisited.add(nodes[0][0]);
-        nodes[0][0].distance = 0;
 
+        //handle Starting Position, since it doesn't have a direction
+        nodes[0][0].distance = 0;
+        nodes[0][0].visited = true;
+        checkAllNext(nodes, unvisited, new Position(0, 0, Position.Direction.R), nodes[0][0]);
+        checkAllNext(nodes, unvisited, new Position(0, 0, Position.Direction.D), nodes[0][0]);
+
+        /*FIXME nodes behave different when entered from a different direction.
+           it is probably better to treat the same node entered from different directions as destinct nodes*/
 
         boolean searching = true;
         while (searching && !unvisited.isEmpty()) {
@@ -26,19 +32,22 @@ public class Day17 {
             if (current == target) searching = false;
             unvisited.remove(current);
             current.visited = true;
-            Position p = new Position(current);
-            checkNext(nodes, unvisited, p.move(0, Position.Direction.R), current);
-            checkNext(nodes, unvisited, p.move(0, Position.Direction.L), current);
-            checkNext(nodes, unvisited, p.move(1, Position.Direction.R), current);
-            checkNext(nodes, unvisited, p.move(1, Position.Direction.L), current);
-            checkNext(nodes, unvisited, p.move(2, Position.Direction.R), current);
-            checkNext(nodes, unvisited, p.move(2, Position.Direction.L), current);
-            checkNext(nodes, unvisited, p.move(3, Position.Direction.R), current);
-            checkNext(nodes, unvisited, p.move(3, Position.Direction.L), current);
+            checkAllNext(nodes, unvisited, new Position(current), current);
         }
 
         if (TimedTest.PRINT) printPath(nodes);
         System.out.println(target.distance);
+    }
+
+    private static void checkAllNext(Node[][] nodes, List<Node> unvisited, Position p, Node current) {
+        checkNext(nodes, unvisited, p.move(0, Position.Direction.R), current);
+        checkNext(nodes, unvisited, p.move(0, Position.Direction.L), current);
+        checkNext(nodes, unvisited, p.move(1, Position.Direction.R), current);
+        checkNext(nodes, unvisited, p.move(1, Position.Direction.L), current);
+        checkNext(nodes, unvisited, p.move(2, Position.Direction.R), current);
+        checkNext(nodes, unvisited, p.move(2, Position.Direction.L), current);
+        checkNext(nodes, unvisited, p.move(3, Position.Direction.R), current);
+        checkNext(nodes, unvisited, p.move(3, Position.Direction.L), current);
     }
 
     private static void checkNext(Node[][] nodes, List<Node> unvisited, Position p, Node previous) {
