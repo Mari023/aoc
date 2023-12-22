@@ -39,7 +39,7 @@ public record Position(int x, int y, Direction direction) {
                 }
             }
             case L -> {
-                newX--;
+                newX -= length;
                 switch (direction) {
                     case L -> {
                         newY++;
@@ -53,7 +53,7 @@ public record Position(int x, int y, Direction direction) {
                 }
             }
             case R -> {
-                newX++;
+                newX += length;
                 switch (direction) {
                     case L -> {
                         newY--;
