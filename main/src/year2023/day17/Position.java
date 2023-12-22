@@ -75,7 +75,7 @@ public record Position(int x, int y, Direction direction) {
         if (y < 0 || y >= nodes.length) return null;
         if (x < 0 || x >= nodes[y].length) return null;
         Node node = nodes[y][x];
-        return node.previous == null ? node : null;
+        return node.visited ? null : node;
     }
 
 
