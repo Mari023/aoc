@@ -21,7 +21,7 @@ public class Day17 {
 
 
         boolean searching = true;
-        while (searching || unvisited.isEmpty()) {
+        while (searching && !unvisited.isEmpty()) {
             Node current = getSmallest(unvisited);
             if (current == target) searching = false;
             unvisited.remove(current);

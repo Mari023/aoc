@@ -11,8 +11,32 @@ public record Position(int x, int y, Direction direction) {
         Direction newDirection = null;
         switch (this.direction) {//TODO
             case U -> {
+                newY -= length;
+                switch (direction) {
+                    case L -> {
+                        newX++;
+                        newDirection = Direction.L;
+                    }
+                    case R -> {
+                        newX--;
+                        newDirection = Direction.R;
+                    }
+                    default -> throw new IllegalArgumentException("Invalid Direction to turn: " + direction);
+                }
             }
             case D -> {
+                newY += length;
+                switch (direction) {
+                    case L -> {
+                        newX--;
+                        newDirection = Direction.R;
+                    }
+                    case R -> {
+                        newX++;
+                        newDirection = Direction.L;
+                    }
+                    default -> throw new IllegalArgumentException("Invalid Direction to turn: " + direction);
+                }
             }
             case L -> {
             }
