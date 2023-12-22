@@ -56,6 +56,7 @@ public class Day17 {
 
     private static void checkNext(List<Node> unvisited, Node n, Node previous, Position.Direction from) {
         if (n == null) return;
+        //FIXME calculate the correct distance based on the path
         if (n.distance < previous.distance + n.heatLoss) return;
         n.previous = previous;
         n.previousDirection = from;
