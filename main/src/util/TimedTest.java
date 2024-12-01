@@ -42,6 +42,11 @@ public class TimedTest {
     }
 
     private static void time() throws ExecutionException, InterruptedException {
+        time2023();
+        time2024();
+    }
+
+    private static void time2023() throws ExecutionException, InterruptedException {
         //put day to time here
         Day01.main(null);
         Day01_extra.main(null);
@@ -65,5 +70,10 @@ public class TimedTest {
         Day18.main(null);
         Day19.main(null);
         Day20.main(null);
+    }
+
+    private static void time2024() {
+        year2024.day01.Day01.main(null);
+        year2024.day01.Day01_extra.main(null);
     }
 }
