@@ -3,6 +3,7 @@ package year2023.day05;
 import util.Util;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.TreeSet;
 
 public class Day05 {
@@ -26,7 +27,7 @@ public class Day05 {
             }
             String[] map = block.split(":\n");
             for (String entry : map[1].split("\n")) {
-                getMap(map[0]).put(entry);
+                Objects.requireNonNull(getMap(map[0])).put(entry);
             }
         });
 
@@ -44,7 +45,7 @@ public class Day05 {
         }
         var locationRanges = humidityToLocation.mapRange(temperatureToHumidity.mapRange(lightToTemperature.mapRange(waterToLight.mapRange(fertilizerToWater.mapRange(soilToFertilizer.mapRange(seedToSoil.mapRange(seeds2)))))));
         locationRanges.sort(RangeMap.Entry::compareTo);
-        System.out.println(locationRanges.get(0).sourceStart());
+        System.out.println(locationRanges.getFirst().sourceStart());
     }
 
     private static RangeMap getMap(String name) {

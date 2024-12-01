@@ -69,7 +69,7 @@ public class Day10 {
         }
 
         if (TimedTest.PRINT) Util.printCharArrayArray(pipes);
-        System.out.println(positions.get(0).steps());
+        System.out.println(positions.getFirst().steps());
         System.out.println(area);
     }
 

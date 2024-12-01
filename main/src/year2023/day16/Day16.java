@@ -32,7 +32,7 @@ public class Day16 {
         List<Beam> beams = new ArrayList<>();
         beams.add(new Beam(startX, startY, startDirection));
         while (!beams.isEmpty()) {
-            Beam beam = beams.get(0);
+            Beam beam = beams.getFirst();
             if (beam.outOfBounds(xBound, yBound)) {
                 beams.remove(beam);
                 continue;

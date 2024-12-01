@@ -66,7 +66,7 @@ public class Day17 {
     }
 
     private static Node getSmallest(List<Node> unvisited) {
-        Node n = unvisited.get(0);
+        Node n = unvisited.getFirst();
         for (Node node : unvisited) {
             if (n.compareTo(node) > 0) n = node;
         }

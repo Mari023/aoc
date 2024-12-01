@@ -1,7 +1,7 @@
 package year2023.day12;
 
 public class Day12 {
-    public static boolean DAY12_PART2_DISABLED = true;
+    public static final boolean DAY12_PART2_DISABLED = true;
     public static void main(String[] args) {
         long result = 0;
         for (String s : Input.INPUT) {

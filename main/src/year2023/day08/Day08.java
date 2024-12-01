@@ -3,12 +3,11 @@ package year2023.day08;
 import util.MutableLong;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class Day08 {
-    public static boolean DAY08_PART2_DISABLED = true;
+    public static final boolean DAY08_PART2_DISABLED = true;
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
         String directions = Input.INPUT[0];
         Map<String, Node> nodes = new HashMap<>();
         for (String s : Input.INPUT[1].split("\n")) {

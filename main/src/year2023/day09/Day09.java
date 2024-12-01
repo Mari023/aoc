@@ -30,14 +30,14 @@ public class Day09 {
     private static long[] getNext(List<Long> list) {
         List<List<Long>> data = new ArrayList<>();
         data.add(list);
-        while (!isAllSame(data.get(data.size() - 1))) {
-            data.add(getDerivative(data.get(data.size() - 1)));
+        while (!isAllSame(data.getLast())) {
+            data.add(getDerivative(data.getLast()));
         }
         long[] prediction = new long[2];
         for (int i = data.size() - 1; i >= 0; i--) {
             var derivative = data.get(i);
-            prediction[0] += derivative.get(derivative.size() - 1);
-            prediction[1] = derivative.get(0) - prediction[1];
+            prediction[0] += derivative.getLast();
+            prediction[1] = derivative.getFirst() - prediction[1];
         }
         return prediction;
     }
@@ -51,7 +51,7 @@ public class Day09 {
     }
 
     private static boolean isAllSame(List<Long> list) {
-        long i = list.get(0);
+        long i = list.getFirst();
         for (Long j : list) {
             if (i != j) return false;
         }

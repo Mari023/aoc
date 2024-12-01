@@ -41,12 +41,12 @@ public class TimedTest {
         System.out.println(TimeUnit.NANOSECONDS.toMicros((long) Arrays.stream(times).average().orElseThrow()));
     }
 
-    private static void time() throws ExecutionException, InterruptedException {
+    private static void time() {
         time2023();
         time2024();
     }
 
-    private static void time2023() throws ExecutionException, InterruptedException {
+    private static void time2023() {
         //put day to time here
         Day01.main(null);
         Day01_extra.main(null);
