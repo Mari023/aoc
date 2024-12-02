@@ -1,7 +1,7 @@
 package year2024.day02;
 
 public class Day02 {
-    public static void main(String[] args) {
+    public static void main() {
         int safeLines = 0;
         for (String s : Input.INPUT.split("\n")) {
             if(isSafe(s.split(" "))) safeLines++;
@@ -9,7 +9,7 @@ public class Day02 {
         System.out.println(safeLines);
     }
 
-    private static boolean isSafe(String[] line) {
+    public static boolean isSafe(String[] line) {
         State state = State.UNKNOWN;
         for (int i = 1; i < line.length; i++) {
             int current = Integer.parseInt(line[i]);
@@ -24,7 +24,7 @@ public class Day02 {
         return true;
     }
 
-    private enum State {
+    public enum State {
         UNKNOWN, INCREASING, DECREASING, UNSAFE;
 
         State transition(int current, int previous) {
