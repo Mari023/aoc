@@ -3,7 +3,7 @@ package year2024.day01;
 import java.util.Collections;
 
 public class Day01_extra {
-    public static void main(String[] args) {
+    public static void main() {
         var input = Day01.readInput();
         var listA = input.listA();
         var listB = input.listB();

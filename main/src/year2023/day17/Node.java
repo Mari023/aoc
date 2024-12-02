@@ -22,8 +22,4 @@ public class Node implements Comparable<Node> {
         return distance - node.distance;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return this == o;
-    }
 }

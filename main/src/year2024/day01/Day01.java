@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Day01 {
-    public static void main(String[] args) {
+    public static void main() {
         var input = readInput();
         var listA = input.listA();
         var listB = input.listB();

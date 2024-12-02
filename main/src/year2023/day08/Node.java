@@ -28,11 +28,6 @@ public class Node {
         return new Node(input[0], directions[0], directions[1].replaceAll("\\)", ""));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return this == o;
-    }
-
     public boolean equals(String s) {
         return ID.equals(s);
     }

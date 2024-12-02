@@ -22,13 +22,12 @@ import year2023.day19.Day19;
 import year2023.day20.Day20;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class TimedTest {
     public static boolean PRINT = true;
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main() {
         PRINT = false;
         long[] times = new long[1000];
         for (int i = 0; i < times.length; i++) {
@@ -73,7 +72,7 @@ public class TimedTest {
     }
 
     private static void time2024() {
-        year2024.day01.Day01.main(null);
-        year2024.day01.Day01_extra.main(null);
+        year2024.day01.Day01.main();
+        year2024.day01.Day01_extra.main();
     }
 }

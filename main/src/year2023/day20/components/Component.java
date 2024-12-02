@@ -64,11 +64,6 @@ public sealed abstract class Component permits Broadcaster, Button, DummyCompone
     }
 
     @Override
-    public boolean equals(Object o) {
-        return this == o;
-    }
-
-    @Override
     public int hashCode() {
         return id;
     }
