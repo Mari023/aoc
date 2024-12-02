@@ -57,16 +57,7 @@ public class Day02Part2 {
         b.remove(position);
         if (c.size() > position + 1) c.remove(position + 1);
 
-        boolean safe = isSafeAfterDampening(d) || isSafeAfterDampening(a) || isSafeAfterDampening(b) || isSafeAfterDampening(c);
-        if (!safe) {
-            System.out.println(report);
-            System.out.println(d);
-            System.out.println(a);
-            System.out.println(b);
-            System.out.println(c);
-            System.out.println();
-        }
-        return safe;
+        return isSafeAfterDampening(d) || isSafeAfterDampening(a) || isSafeAfterDampening(b) || isSafeAfterDampening(c);
     }
 
     private static boolean isSafeAfterDampening(List<Integer> report) {

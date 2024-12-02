@@ -74,5 +74,7 @@ public class TimedTest {
     private static void time2024() {
         year2024.day01.Day01.main();
         year2024.day01.Day01_extra.main();
+        year2024.day02.Day02.main();
+        year2024.day02.Day02Part2.main();
     }
 }
