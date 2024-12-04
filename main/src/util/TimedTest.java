@@ -77,5 +77,6 @@ public class TimedTest {
         year2024.day02.Day02.main();
         year2024.day02.Day02Part2.main();
         year2024.day03.Day03.main();
+        year2024.day04.Day04.main();
     }
 }

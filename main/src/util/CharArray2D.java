@@ -26,7 +26,7 @@ public class CharArray2D {
     public CharArray2D(String[] strings) {
         this(strings.length, strings[0].length());
         for (int i = 0; i < strings.length; i++) {
-            System.arraycopy(strings[i].toCharArray(), 0, chars, rows*i, columns);
+            System.arraycopy(strings[i].toCharArray(), 0, chars, rows * i, columns);
         }
     }
 
