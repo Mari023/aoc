@@ -143,4 +143,33 @@ public class Input {
             SAMASAXMXSMAAMMXAAAASMAMAAMXSAMXAAMAAAXMAAAAMXSAAXSASMSAAMAAMXMASASMXMASXSMMASMMXMAMSAMXXMAMSASAMXAAMMMSMMSXMASAMXMXMASAAAAMASXSXAAAAAAAMASA
             SXSXSXMASMMMXSAMMMMMMSASXSXMAXMXSXSMSSSMMMSMMMSMXMAMXXMMSSMXMXMSMXAAXMAMAXXSMMMMXSSMMAXXSSXMASMXMASASXXMAXSAMXMASMXXSXMMSSMSXAMMASMSSMMMSSMA
             """;
+    public static final String TEST = """
+            MMMSXXMASM
+            MSAMXMSMSA
+            AMXSXMAAMM
+            MSAMASMSMX
+            XMASAMXAMM
+            XXAMMXXAMA
+            SMSMSASXSS
+            SAXAMASAAA
+            MAMMMXMMMM
+            MXMXAXMASX
+            """;
+    public static final String TEST2 = """
+            S_S
+            _A_
+            M_M
+            """;
+    public static final String TEST3 = """
+            .M.S......
+            ..A..MSMS.
+            .M.S.MAA..
+            ..A.ASMSM.
+            .M.S.M....
+            ..........
+            S.S.S.S.S.
+            .A.A.A.A..
+            M.M.M.M.M.
+            ..........
+            """;
 }

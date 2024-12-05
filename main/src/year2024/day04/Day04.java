@@ -11,6 +11,7 @@ public class Day04 {
         loopSEDiagonal(grid, matcher);
         loopSWDiagonal(grid, matcher);
         System.out.println(matcher.matches());
+        Day04Part2.main();
     }
 
     private static void loopHorizontal(CharArray2D grid, Matcher m) {
