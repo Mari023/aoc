@@ -14,7 +14,7 @@ public record Equation(long result, List<Integer> values) {
             sum += value;
             product *= value;
         }
-        if (product < result || sum > result) return false;
+        //if (product < result || sum > result) return false;
         if (product == result || sum == result) return true;
 
         if (values().size() > 65) throw new IllegalStateException("Can't work with more than 64 operators");
