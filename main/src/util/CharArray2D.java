@@ -34,6 +34,11 @@ public class CharArray2D {
         return chars[x + y * columns];
     }
 
+    public char getOrElse(int x, int y, char alternative) {
+        if (isInside(x, y)) return get(x, y);
+        return alternative;
+    }
+
     public void set(int x, int y, char c) {
         chars[x + y * columns] = c;
     }
@@ -50,6 +55,22 @@ public class CharArray2D {
         var result = new char[getColumns()];
         System.arraycopy(chars, y * getColumns(), result, 0, result.length);
         return result;
+    }
+
+    public boolean isInside(int x, int y) {
+        return x >= 0 && x < rows && y >= 0 && y < columns;
+    }
+
+    public char[] array() {
+        return chars;
+    }
+
+    public int getRowIndex(int index) {
+        return index / columns;
+    }
+
+    public int getColumnIndex(int index) {
+        return index % rows;
     }
 
     @Override
